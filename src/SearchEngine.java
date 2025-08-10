@@ -19,7 +19,7 @@ public class SearchEngine {
      */
     public void add(Searchable item) {
         if (size >= data.length) {
-            throw new IllegalStateException("Array is full");
+            throw new IllegalStateException("Search engine is full");
         }
         data[size++] = item;
     }
@@ -31,14 +31,16 @@ public class SearchEngine {
      * @return массив найденных объектов длиной 5 (или меньше, если найдено менее 5 элементов)
      */
     public Searchable[] search(String query) {
-        Searchable[] result = new Searchable[5]; // Максимум 5 элементов
-        int foundCount = 0;
+        Searchable[] result = new Searchable[5]; // Массив фиксированного размера для хранения максимум 5 элементов
+        int index = 0;                           // Индекс для вставки новых элементов
 
-        for (Searchable s : data) {
-            if (s != null && s.getSearchTerm().contains(query)) { // Проверяем наличие query в терминале поиска
-                result[foundCount++] = s;
+        for (Searchable user : data) {
+            if (user != null && user.getSearchTerm().contains(query)) {
+                result[index++] = user;           // Добавляем найденный элемент
 
-                if (foundCount == 5) break; // Прерваться, если найдены 5 элементов
+                if (index >= result.length) {    // Проверяем количество заполненных элементов относительно длины массива
+                    break;                       // Прерываем цикл, если достигли лимита
+                }
             }
         }
 

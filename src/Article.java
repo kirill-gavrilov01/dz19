@@ -7,10 +7,11 @@ public final class Article implements Searchable {
         this.text = text;
     }
 
+
     @Override
     public String getSearchTerm() {
-        return toString(); // Используем всю статью для поиска
-    }
+    return title + " " + text; // Используем только полезные поля
+}
 
     @Override
     public String getContentType() {
@@ -21,7 +22,6 @@ public final class Article implements Searchable {
     public String getName() {
         return title;
     }
-
     @Override
     public String toString() {
         return title + "\\n" + text;
